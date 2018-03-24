@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 
 <dom-module id="Twitter-RestAPI">
   <template>
@@ -7,7 +9,20 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <iron-ajax
+    auto
+    url="https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=1431771662&count=2"
+    params='{"part":"snippet", "q":"polymer", "key": "vT35OK8SauQxCafWgcnigM275", "type": "text"}'
+    handle-as="json"
+    last-response="{{ajaxResponse}}"
+    >
+    </iron-ajax>
+  <pre>[[json(ajaxResponse)]]</pre>
+
+  <template is="dom-repeat" items="[[ajaxResponse]]">
+    <span>[[item.name]]</span>
+  </template>
+
   </template>
 
   <script>
@@ -29,8 +44,12 @@
           }
         };
       }
-    }
 
+      json(obj) {
+        return JSON.stringify(obj, null, 2);
+      }
+
+    } 
     window.customElements.define(TwitterRestAPI.is, TwitterRestAPI);
   </script>
 </dom-module>
