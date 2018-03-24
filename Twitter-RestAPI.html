@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="Twitter-RestAPI">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `Twitter-RestAPI`
+     * simple test API from twitter
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TwitterRestAPI extends Polymer.Element {
+      static get is() { return 'Twitter-RestAPI'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'Twitter-RestAPI'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(TwitterRestAPI.is, TwitterRestAPI);
+  </script>
+</dom-module>
